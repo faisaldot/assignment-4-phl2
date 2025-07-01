@@ -12,6 +12,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     Component: App,
+
     children: [
       { path: "/books", Component: BookListPage },
       { path: "/create-book", Component: AddBookPage },

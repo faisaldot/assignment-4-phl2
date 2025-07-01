@@ -14,7 +14,7 @@ export default function Navbar() {
           <Link to="/create-book" className="hover:text-gray-300">
             Add Book
           </Link>
-          <Link to="/borrow-summery" className="hover:text-gray-300">
+          <Link to="/borrow-summary" className="hover:text-gray-300">
             Borrow Summary
           </Link>
         </div>
