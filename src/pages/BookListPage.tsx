@@ -67,7 +67,7 @@ export default function BookListPage() {
                 </Badge>
               </TableCell>
               <TableCell className="flex space-x-4">
-                <Link to={`/edit-book/$${book._id}`}>
+                <Link to={`/edit-book/${book._id}`}>
                   <Tooltip>
                     <TooltipTrigger>
                       <SquarePen
@@ -80,7 +80,7 @@ export default function BookListPage() {
                     </TooltipContent>
                   </Tooltip>
                 </Link>
-                <Link to={`/edit-book/$${book._id}`}>
+                <Link to={``}>
                   <Tooltip>
                     <TooltipTrigger>
                       <BookMinus
@@ -93,7 +93,7 @@ export default function BookListPage() {
                     </TooltipContent>
                   </Tooltip>
                 </Link>
-                <Link to={`/edit-book/$${book._id}`}>
+                <Link to={``}>
                   <Tooltip>
                     <TooltipTrigger>
                       <Trash2
