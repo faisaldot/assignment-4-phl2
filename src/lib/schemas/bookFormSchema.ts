@@ -16,4 +16,5 @@ export const bookFormSchema = z.object({
   isbn: z.string().min(10, { message: "ISBN must be at least 10 characters." }),
   description: z.string().optional(),
   copies: z.coerce.number().min(0, { message: "Copies can'nt be negative." }),
+  available: z.boolean().optional(),
 });

@@ -99,50 +99,48 @@ export default function BookListPage() {
               <TableCell>{book.copies}</TableCell>
               <TableCell>
                 <Badge variant={book.available ? "default" : "destructive"}>
-                  {book.available ? "Available" : "Out of Stock"}
+                  {book.available ? "Available" : "Unavailable"}
                 </Badge>
               </TableCell>
               <TableCell className="flex space-x-4">
-                <Link to={`/edit-book/${book._id}`}>
-                  <Tooltip>
-                    <TooltipTrigger>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Link to={`/edit-book/${book._id}`}>
                       <SquarePen
                         size="20px"
                         className="hover:text-blue-500 cursor-pointer"
                       />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Edit Book</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </Link>
-                <Link to={``}>
-                  <Tooltip>
-                    <TooltipTrigger>
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Edit Book</p>
+                  </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Link to={`/borrow/${book._id}`}>
                       <BookMinus
                         size="20px"
                         className="hover:text-green-500 cursor-pointer"
                       />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Borrow Book</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </Link>
-                <Link to={``}>
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <Trash2
-                        size="20px"
-                        className="hover:text-red-500 cursor-pointer"
-                        onClick={() => handleOpenDialog(book._id)}
-                      />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Delete Todo</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </Link>
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Borrow Book</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                <Tooltip>
+                  <TooltipTrigger onClick={() => handleOpenDialog(book._id)}>
+                    <Trash2
+                      size="20px"
+                      className="hover:text-red-500 cursor-pointer"
+                    />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Delete Book</p>
+                  </TooltipContent>
+                </Tooltip>
               </TableCell>
             </TableRow>
           ))}
