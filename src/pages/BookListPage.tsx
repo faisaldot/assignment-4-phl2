@@ -1,8 +1,10 @@
 import { SquarePen, Trash2, BookMinus } from "lucide-react";
-import { useGetBooksQuery } from "@/app/features/books/bookApi";
+import {
+  useDeleteBookMutation,
+  useGetBooksQuery,
+} from "@/app/features/books/bookApi";
 import type { IBook } from "@/app/types";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -17,11 +19,45 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useState } from "react";
+import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 export default function BookListPage() {
-  const { isError, isLoading, data: books } = useGetBooksQuery();
+  const { isError, isLoading, data: response } = useGetBooksQuery();
+  const [deleteBook, { isLoading: isDeleting }] = useDeleteBookMutation();
 
-  console.log(books);
+  const [selectedBookId, setSelectedBookId] = useState<string | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  function handleOpenDialog(bookId: string) {
+    setSelectedBookId(bookId);
+    setIsDialogOpen(true);
+  }
+
+  async function handleDelete() {
+    if (!selectedBookId) return;
+    try {
+      const res = await deleteBook(selectedBookId).unwrap();
+      if (res.success) {
+        toast.success("Book deleted successfully.");
+      }
+    } catch (error) {
+      toast.error("Failed to delete the book.");
+    } finally {
+      setIsDialogOpen(false);
+      setSelectedBookId(null);
+    }
+  }
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -47,7 +83,7 @@ export default function BookListPage() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {books?.data.map((book: IBook) => (
+          {response?.data.map((book: IBook) => (
             <TableRow key={book._id}>
               <TableCell>
                 <Link
@@ -99,6 +135,7 @@ export default function BookListPage() {
                       <Trash2
                         size="20px"
                         className="hover:text-red-500 cursor-pointer"
+                        onClick={() => handleOpenDialog(book._id)}
                       />
                     </TooltipTrigger>
                     <TooltipContent>
@@ -111,6 +148,23 @@ export default function BookListPage() {
           ))}
         </TableBody>
       </Table>
+
+      <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure delete this book?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This book is permanently delete the book from database.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDelete} disabled={isDeleting}>
+              {isDeleting ? "Deleting" : "Continue"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 }
