@@ -33,3 +33,11 @@ export interface BorrowResponse {
   quantity: number;
   dueDate: string;
 }
+
+export interface BorrowSummary {
+  book: {
+    title: string;
+    isbn: string;
+  };
+  totalQuantity: number;
+}

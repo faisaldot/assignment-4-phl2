@@ -1,5 +1,10 @@
 import { api } from "@/app/apiSlice";
-import type { ApiResponse, BorrowResponse, IBorrow } from "@/app/types";
+import type {
+  ApiResponse,
+  BorrowResponse,
+  BorrowSummary,
+  IBorrow,
+} from "@/app/types";
 
 export const borrowApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -11,7 +16,12 @@ export const borrowApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Books", "Borrows"],
     }),
+
+    getBorrowSummary: builder.query<ApiResponse<BorrowSummary[]>, void>({
+      query: () => "/borrow",
+      providesTags: ["Borrows"],
+    }),
   }),
 });
 
-export const { useBorrowBookMutation } = borrowApi;
+export const { useBorrowBookMutation, useGetBorrowSummaryQuery } = borrowApi;
