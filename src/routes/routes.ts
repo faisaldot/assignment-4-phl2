@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
       { path: "/create-book", Component: AddBookPage },
       { path: "/books/:id", Component: BookDetailPage },
       { path: "/edit-book/:id", Component: EditBookPage },
-      { path: "/borrow/:borrowId", Component: BorrowBookPage },
+      { path: "/borrow/:bookId", Component: BorrowBookPage },
       { path: "/borrow-summary", Component: BorrowSummaryPage },
     ],
   },

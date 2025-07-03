@@ -20,3 +20,16 @@ export interface ApiResponse<T> {
   message: string;
   data: T;
 }
+
+export interface IBorrow {
+  book: string;
+  quantity: number;
+  dueDate: Date;
+}
+
+export interface BorrowResponse {
+  _id: string;
+  book: string;
+  quantity: number;
+  dueDate: string;
+}
