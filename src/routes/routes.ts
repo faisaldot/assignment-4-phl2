@@ -1,4 +1,5 @@
 import App from "@/App";
+import Hero from "@/components/hero";
 import AddBookPage from "@/pages/AddBookPage";
 import BookDetailPage from "@/pages/BookDetailPage";
 import BookListPage from "@/pages/BookListPage";
@@ -14,6 +15,7 @@ export const router = createBrowserRouter([
     Component: App,
 
     children: [
+      { path: "/", Component: Hero, index: true },
       { path: "/books", Component: BookListPage },
       { path: "/create-book", Component: AddBookPage },
       { path: "/books/:id", Component: BookDetailPage },
