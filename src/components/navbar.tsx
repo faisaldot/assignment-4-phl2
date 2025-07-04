@@ -1,3 +1,4 @@
+import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { BookOpen, FileText, Plus } from "lucide-react";
 import { Link } from "react-router";
@@ -36,6 +37,7 @@ export default function Navbar() {
                 <span>Borrow Summary</span>
               </Link>
             </Button>
+            <ModeToggle />
           </div>
         </div>
       </div>
