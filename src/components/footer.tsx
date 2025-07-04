@@ -1,7 +1,9 @@
 export default function Footer() {
   return (
-    <footer className="bg-gray-800 text-white p-4 text-center">
-      <p>&copy; 2025 FCB Library. All rights reserved.</p>
+    <footer className=" p-4 text-center border-t-1">
+      <p className="text-sm text-muted-foreground">
+        &copy; 2025 Library.inc All rights reserved.
+      </p>
     </footer>
   );
 }
